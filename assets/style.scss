@@ -1,0 +1,101 @@
+@import "bulma/sass/utilities/_all";
+
+// $green: #87A22D;
+// $green-invert: findColorInvert($green);
+// $black: #111111;
+// $white: #ffffff;
+// $yellow: #F8FFE5;
+// $yellow-invert: findColorInvert($yellow);
+// $blue: #343760;
+// $blue-invert: findColorInvert($blue);
+// $red: #A71D31;
+// $red-invert: findColorInvert($red);
+// //$grey-lighter: #ecebea;
+// $grey-light: #8B919F;
+// $grey: #62636B;
+// $grey-dark: #43454A;
+
+// // $custom-colors: (
+
+// // );
+
+// $shades: (
+//   "white-ter": (
+//     $white-ter
+//   )
+// );
+
+// $colors: (
+//   "mac-n-cheese": (
+//     $yellow,
+//     $yellow-invert
+//   ),
+//   "white": (
+//     $white,
+//     $black
+//   ),
+//   "black": (
+//     $black,
+//     $white
+//   ),
+//   "light": (
+//     $white,
+//     $black
+//   ),
+//   "dark": (
+//     $black,
+//     $white
+//   ),
+//   "primary": (
+//     $green,
+//     $green-invert
+//   ),
+//   "info": (
+//     $blue,
+//     $blue-invert
+//   ),
+//   "success": (
+//     $green,
+//     $green-invert
+//   ),
+//   "warning": (
+//     $yellow,
+//     $yellow-invert
+//   ),
+//   "danger": (
+//     $red,
+//     $red-invert
+//   )
+// );
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+
+.feature {
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+  // background-color: $grey-lighter;
+  transition: background 0.5s linear, color 0.5s;
+}
+.feature .icon {
+  color: $primary;
+}
+.feature:hover {
+  background: $primary;
+  color: $white-ter;
+}
+.feature:hover a, .feature:hover .title, .feature:hover .subtitle, .feature:hover .icon {
+  color: $white;
+}
+@media only screen and (max-width: $tablet){
+  .feature {
+    background: $primary;
+  }
+  .feature a, .feature .title, .feature .subtitle, .feature .icon {
+    color: $white;
+  }
+  .feature:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+}
