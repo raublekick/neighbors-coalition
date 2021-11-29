@@ -1,5 +1,6 @@
 <template>
-  <div class="has-text-centered feature">
+<div>
+  <div class="has-text-centered feature p-3">
     <nuxt-link v-if="route" :to="{ name: route }">
       <div>
         <b-icon v-if="icon" :icon="icon" size="is-large" :title="title" />
@@ -16,6 +17,7 @@
           {{subTitle}}
         </p>
     </div>
+  </div>
   </div>
 </template>
 <script>

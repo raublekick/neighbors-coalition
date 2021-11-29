@@ -110,7 +110,7 @@
   .feature a, .feature .title, .feature .subtitle, .feature .icon {
     color: $white;
   }
-  .feature:not(:last-child) {
-    margin-bottom: 0.5em;
-  }
+  // .feature:not(:last-child) {
+  //   margin-bottom: 0.5em;
+  // }
 }
