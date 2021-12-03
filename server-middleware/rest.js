@@ -13,7 +13,8 @@ const getSheet = async () => {
     "?alt=json&key=" +
     process.env.NUXT_ENV_GDRIVE_API_KEY;
     const response = await fetch(sheetUrl);
-    return response.json();  
+    const data = response.json();
+    return data;  
 };
 
 app.use(bodyParser.json())
@@ -22,7 +23,6 @@ app.get('/resources', async (req, res) => {
   const resources = [];
   for (let tab = 1; tab <= totalFeeds; tab++) {
     const json = await getSheet(tab);
-    console.log(json);
     const rows = json.values;
 
     // columns will be first row of data, rows will have removed first row
@@ -39,7 +39,7 @@ app.get('/resources', async (req, res) => {
       resources.push(formattedRow);
     }
   }
-  res.json({ data: resources })
+  res.json(resources)
 })
 
 module.exports = app

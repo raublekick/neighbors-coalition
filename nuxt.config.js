@@ -61,7 +61,6 @@ export default {
   },
 
   privateRuntimeConfig: {},
-
   serverMiddleware: [
     { path: "/api", handler: "~/server-middleware/rest.js" },
   ],
