@@ -17,6 +17,7 @@ export default {
   css: ["@/assets/style.scss"],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "@/plugins/repository.js",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,7 +42,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    withCredentials: true,
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -55,5 +58,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  privateRuntimeConfig: {},
+
+  serverMiddleware: [
+    { path: "/api", handler: "~/server-middleware/rest.js" },
+  ],
 }

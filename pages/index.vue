@@ -10,6 +10,15 @@
 <script>
 
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
+  data() {
+    return {
+      resources: []
+    }
+  },
+  async fetch() {
+    this.resources = await this.$repositories.resources.get();
+  },
+  fetchOnServer: false,
 }
 </script>
