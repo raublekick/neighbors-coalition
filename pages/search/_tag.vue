@@ -82,8 +82,15 @@ export default {
   },
   computed: {
     ...mapState(["resources"]),
+    tagResources() {
+      return _.filter(this.resources, resource => {
+        const tags = _.chain(resource.tags.split(",")).lowerCase().trim().replace(" ", "-");
+        
+        return resource.category.toLowerCase() === this.$route.params.tag.toLowerCase() || _.includes(tags, this.$route.params.tag.toLowerCase());
+      });
+    },
     filteredResources() {
-      let filtered = this.resources;
+      let filtered = this.tagResources;
       if (this.filter !== "") {
         filtered = this.search(filtered, this.filter);
       }

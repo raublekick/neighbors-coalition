@@ -6,7 +6,6 @@ export const state = () => ({
 export const mutations = {
   SET_RESOURCES(state, resources) {
     state.resources = resources;
-    console.log(state.resources);
   }
 }
 
