@@ -84,7 +84,7 @@ export default {
     ...mapState(["resources"]),
     tagResources() {
       return _.filter(this.resources, resource => {
-        const tags = _.chain(resource.tags.split(",")).lowerCase().trim().replace(" ", "-");
+        const tags = _.chain(resource.tags.split(",")).lowerCase().trim().replace(" ", "-").value();
         
         return resource.category.toLowerCase() === this.$route.params.tag.toLowerCase() || _.includes(tags, this.$route.params.tag.toLowerCase());
       });
