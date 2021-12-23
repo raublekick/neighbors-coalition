@@ -12,9 +12,21 @@ const getSheet = async () => {
     process.env.NUXT_ENV_TAB_NAME +
     "?alt=json&key=" +
     process.env.NUXT_ENV_GDRIVE_API_KEY;
-    const response = await fetch(sheetUrl);
-    const data = response.json();
-    return data;  
+  const response = await fetch(sheetUrl);
+  const data = response.json();
+  return data;  
+};
+
+const getCalendar = async () => {
+  const url =
+    "https://www.googleapis.com/calendar/v3/calendars/" +
+    process.env.CALENDAR_ID +
+    "/events/" +
+    "?singleEvents=true&orderBy=startTime&key=" +
+    process.env.NUXT_ENV_GDRIVE_API_KEY;
+  const response = await fetch(url);
+  const data = response.json();
+  return data;  
 };
 
 app.use(bodyParser.json())
@@ -40,6 +52,11 @@ app.get('/resources', async (req, res) => {
     }
   }
   res.json(resources)
-})
+});
+
+app.get('/calendar', async (req, res) => {
+  const json = await getCalendar();
+  res.json(json.items)
+});
 
 module.exports = app

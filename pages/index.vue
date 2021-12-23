@@ -10,8 +10,15 @@
       <feature class="column is-half" route="help-me" icon="hand-heart" title="Help me" sub-title="I need assistance finding resources." />
       <feature class="column is-half" route="give-help" icon="handshake" title="I want to help" sub-title="Find opportunities to help your neighbors." />
     </div>
+
     <div class="has-text-centered">
       <nuxt-link :to="{ name: 'all' }">View all</nuxt-link>
+    </div>
+
+    <div>
+      <div v-for="(event,index) in events" :key="index" class="pb-3">
+        <event :event="event"/>
+      </div>
     </div>
   </section>
 </template>
@@ -24,7 +31,10 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(["resources"])
+    ...mapState(["resources", "events"])
   }
 }
 </script>
+<style scoped>
+
+</style>

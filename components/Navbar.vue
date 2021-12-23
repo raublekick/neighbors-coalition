@@ -15,6 +15,27 @@
       >
         Home
       </b-navbar-item>
+      <b-navbar-item
+        tag="router-link"
+        class="has-text-weight-bold"
+        :to="{ name: 'help-me' }"
+      >
+        Help Me
+      </b-navbar-item>
+      <b-navbar-item
+        tag="router-link"
+        class="has-text-weight-bold"
+        :to="{ name: 'give-help' }"
+      >
+        Give Help
+      </b-navbar-item>
+      <b-navbar-item
+        tag="router-link"
+        class="has-text-weight-bold"
+        :to="{ name: 'calendar' }"
+      >
+        Calendar
+      </b-navbar-item>
       <!-- <b-navbar-item
         tag="router-link"
         class="has-text-weight-bold"
