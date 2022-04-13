@@ -1,6 +1,5 @@
 <template>
   <div class="section">
-    
     <b-field>
       <b-input
         v-model="filter"
@@ -71,64 +70,64 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import * as _ from "lodash";
+import { mapState } from 'vuex'
+import * as _ from 'lodash'
 export default {
-  name: "Home",
+  name: 'Home',
   data() {
     return {
-      filter: "",
-    };
+      filter: '',
+    }
   },
   computed: {
-    ...mapState(["resources"]),
+    ...mapState(['resources']),
     filteredResources() {
-      let filtered = this.resources;
-      if (this.filter !== "") {
-        filtered = this.search(filtered, this.filter);
+      let filtered = this.resources
+      if (this.filter !== '') {
+        filtered = this.search(filtered, this.filter)
       }
 
-      return filtered;
+      return filtered
     },
   },
   methods: {
     print() {
-      window.print();
+      window.print()
     },
     search(collection, text) {
       return _.filter(collection, (object) => {
-        const search = this.deepSearch(object, text.toLowerCase());
-        return _.keys(search).length > 0;
-      });
+        const search = this.deepSearch(object, text.toLowerCase())
+        return _.keys(search).length > 0
+      })
     },
 
     deepSearch(collection, predicate, thisArg) {
       if (_.isFunction(predicate)) {
-        predicate = _.iteratee(predicate, thisArg);
+        predicate = _.iteratee(predicate, thisArg)
       } else {
-        let keys = _.flatten(_.tail(arguments));
-        if (typeof keys === "string") {
-          keys = keys.toLowerCase();
+        let keys = _.flatten(_.tail(arguments))
+        if (typeof keys === 'string') {
+          keys = keys.toLowerCase()
         }
         predicate = function (val) {
-          if (typeof val === "string") {
-            val = val.toLowerCase();
+          if (typeof val === 'string') {
+            val = val.toLowerCase()
           }
-          return _.includes(val, keys);
-        };
+          return _.includes(val, keys)
+        }
       }
-      const that = this;
+      const that = this
       return _.transform(collection, function (memo, val, key) {
-        let include = predicate(val, key);
+        let include = predicate(val, key)
         if (!include && _.isObject(val)) {
-          val = that.deepSearch(val, predicate);
-          include = !_.isEmpty(val);
+          val = that.deepSearch(val, predicate)
+          include = !_.isEmpty(val)
         }
         if (include) {
-          _.isArray(collection) ? memo.push(val) : (memo[key] = val);
+          _.isArray(collection) ? memo.push(val) : (memo[key] = val)
         }
-      });
+      })
     },
   },
-};
+}
 </script>
