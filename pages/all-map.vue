@@ -8,31 +8,19 @@
           has-icon
           aria-close-label="Close message"
         >
-          <p class="mt-4">
-            We currently use the latest response for a business location and
-            trust that it is accurate. Responses are manually updated on this
-            website with a delay of 1-2 days.
-          </p>
+          <p class="mt-4">This data is currently sourced from......</p>
           <div class="mt-4">
             <b-button
               tag="a"
               type="is-primary"
               target="_blank"
-              href="https://docs.google.com/forms/d/1ikzeLf68sLK1XZqIoXMKJUL7ooxR9n7744ESVJSjskE"
-              >Submit A Business</b-button
-            >
-            - or -
-            <b-button
-              tag="a"
-              type="is-info"
-              target="_blank"
-              href="https://docs.google.com/spreadsheets/d/13cf0sM_IS6TAH09J3KCVOwZdHyakwG1BmgEWwqHvCsU"
-              >View Submission Data</b-button
+              @click.prevent=""
+              >Submit a correction</b-button
             >
           </div>
         </b-message>
 
-        <!-- <map-view :items="filteredResources" :center="center" /> -->
+        <map-view :items="filteredResources" :center="center" />
 
         <section class="mt-4">
           <b-field grouped group-multiline>
@@ -60,16 +48,15 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import * as _ from "lodash";
 import { mapState } from "vuex";
-// mport MapView from "@/components/Map";
+import MapView from "@/components/Map";
 import ResourceList from "~/components/ResourceList.vue";
 
 export default {
   name: "Home",
   components: {
-    // MapView,
+    MapView,
     ResourceList,
   },
   data() {
@@ -84,18 +71,23 @@ export default {
   computed: {
     ...mapState(["resources"]),
     filteredResources() {
-      let filtered = this.resources;
+      let filtered = this.mappableItems;
       if (this.filter !== "") {
         filtered = this.search(filtered, this.filter);
       }
 
       return filtered;
     },
+    mappableItems() {
+      return _.filter(this.resources, (item) => {
+        return item.latLng && item.latLng !== "";
+      });
+    },
   },
 
   methods: {
     setCenter(value) {
-      this.center = [value[0], value[1]];
+      this.center = { lat: parseFloat(value[0]), lng: parseFloat(value[1]) };
     },
     print() {
       window.print();

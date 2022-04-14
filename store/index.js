@@ -16,6 +16,7 @@ export const mutations = {
 export const actions = {
   async loadData({ commit }) {
     const data = await this.$repositories.resources.get();
+
     commit("SET_RESOURCES", data);
   },
   async loadEvents({ commit }) {

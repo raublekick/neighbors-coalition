@@ -6,6 +6,7 @@
         <!-- Add icon if saved -->
         <div class="media-left">
           <b-tooltip
+            v-if="item.latLng"
             position="is-left"
             label="Go to this resource on the map"
             :always="d_persistentTooltip"
@@ -14,10 +15,10 @@
             <figure
               class="image is-48x48"
               @mouseenter="handleIconHover"
-              @click="clicked(item.latlng)"
+              @click="clicked([item.lat, item.lng])"
             >
               <a href="#">
-                <img :src="icons[item.zone]" :alt="item.title" />
+                <img :src="icons[0]" :alt="item.name" />
               </a>
             </figure>
           </b-tooltip>
@@ -38,7 +39,6 @@
       </div>
 
       <div class="content">
-        {{ item }}
         <b-taglist>
           <b-tag v-for="tag in tags" :key="tag" type="is-primary">{{
             tag
