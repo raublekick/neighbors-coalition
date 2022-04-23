@@ -62,10 +62,10 @@ export default {
   data() {
     return {
       filter: "",
-      center: [
-        process.env.VUE_APP_CENTER_LAT || 33.4515,
-        process.env.VUE_APP_CENTER_LNG || -112.07,
-      ],
+      center: {
+        lat: process.env.VUE_APP_CENTER_LAT || 33.4515,
+        lng: process.env.VUE_APP_CENTER_LNG || -112.07,
+      },
     };
   },
   computed: {

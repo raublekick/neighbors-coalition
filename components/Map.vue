@@ -3,6 +3,7 @@
     <client-only>
       <l-map
         v-show="items.length"
+        ref="map"
         :zoom="zoom"
         :center="center"
         :options="mapOptions"
@@ -48,15 +49,16 @@ export default {
       },
     },
     center: {
-      type: Array,
+      type: Object,
       default: () => {
-        return [33.4515, -112.07];
+        return { lat: 33.4515, long: -112.07 };
       },
     },
   },
   data() {
     return {
       zoom: 12,
+      defaultZoom: 12,
       id: "mapbox/streets-v11",
       url:
         "https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=" +
@@ -80,6 +82,7 @@ export default {
   computed: {},
   watch: {
     center(val) {
+      this.$refs.map.mapObject.setView(this.center, this.defaultZoom);
       const markerObjects = this.$refs.markersRef.map((ref) => ref.mapObject);
       _.forEach(markerObjects, (item) => {
         if (item._latlng.lat === val.lat && item._latlng.lng === val.lng) {
