@@ -9,6 +9,9 @@
         style="height: 500px; width: 100%"
       >
         <l-tile-layer :id="id" :url="url" :attribution="attribution" />
+        <l-marker ref="centerMarker" :draggable="false" :lat-lng="center">
+          <l-icon :icon-url="icons[1]" :icon-size="iconSize" :icon-anchor="iconAnchor" :popup-anchor="popupAnchor"></l-icon>
+        </l-marker>
         <l-marker
           v-for="(item, index) in items"
           :key="index"

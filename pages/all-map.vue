@@ -19,7 +19,6 @@
             >
           </div>
         </b-message>
-        {{ location }}, {{ center }}
         <map-view :items="filteredResources" :center="center" />
 
         <section class="mt-4">
@@ -89,9 +88,9 @@ export default {
   },
   mounted() {
     // is location stored
-    if (localStorage.location) {
-      this.location = JSON.parse(localStorage.location);
-    } else {
+    // if (localStorage.location) {
+    //   this.location = JSON.parse(localStorage.location);
+    // } else {
       // do we support geolocation
       if (!("geolocation" in navigator)) {
         this.error = "Geolocation is not available.";
@@ -106,15 +105,15 @@ export default {
             this.location.coords.latitude,
             this.location.coords.longitude,
           ];
-          localStorage.location = JSON.stringify(pos);
+          // localStorage.location = JSON.stringify(_.clone(pos));
         },
         (err) => {
           this.gettingLocation = false;
           this.error = err.message;
-          localStorage.location = "";
+          // localStorage.location = "";
         }
       );
-    }
+    // }
   },
 
   methods: {
