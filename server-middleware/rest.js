@@ -14,7 +14,7 @@ const getSheet = async () => {
     process.env.NUXT_ENV_GDRIVE_API_KEY;
   const response = await fetch(sheetUrl);
   const data = response.json();
-  return data;  
+  return data;
 };
 
 const getCalendar = async () => {
@@ -26,7 +26,7 @@ const getCalendar = async () => {
     process.env.NUXT_ENV_GDRIVE_API_KEY;
   const response = await fetch(url);
   const data = response.json();
-  return data;  
+  return data;
 };
 
 app.use(bodyParser.json())
@@ -47,7 +47,6 @@ app.get('/resources', async (req, res) => {
         const column = _.camelCase(columns[i]);
         formattedRow[column] = row[i];
       }
-
       resources.push(formattedRow);
     }
   }
@@ -58,5 +57,14 @@ app.get('/calendar', async (req, res) => {
   const json = await getCalendar();
   res.json(json.items)
 });
+
+app.set('json replacer', function (key, value) {
+  // undefined values are set to `null`
+  if (typeof value === "undefined") {
+    return null;
+  }
+  return value;
+}
+);
 
 module.exports = app
