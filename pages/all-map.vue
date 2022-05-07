@@ -70,7 +70,7 @@
             </b-field>
 
             <b-field label="Business Type">
-              <b-select placeholder="Select a value" v-model="businessType">
+              <b-select v-model="businessType" placeholder="Select a value">
                 <option value="">All</option>
                 <option value="Restaurant / Bar / Food Service">
                   Restaurant / Bar / Food Service
@@ -83,7 +83,7 @@
             </b-field>
 
             <b-field label="Services Offered">
-              <b-select placeholder="Select a value" v-model="services">
+              <b-select v-model="services" placeholder="Select a value">
                 <option value="">All</option>
                 <option value="Dine-in / In-store shopping">
                   Dine-in / In-store shopping
@@ -98,7 +98,7 @@
             </b-field>
 
             <b-field label="Employees wearing masks">
-              <b-select placeholder="Select a value" v-model="employeeMasks">
+              <b-select v-model="employeeMasks" placeholder="Select a value">
                 <option value="">All</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -107,7 +107,7 @@
             </b-field>
 
             <b-field label="Customers wearing masks">
-              <b-select placeholder="Select a value" v-model="customerMasks">
+              <b-select v-model="customerMasks" placeholder="Select a value">
                 <option value="">All</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -143,6 +143,9 @@ export default {
         process.env.VUE_APP_CENTER_LAT || 33.4515,
         process.env.VUE_APP_CENTER_LNG || -112.07,
       ],
+      gettingLocation: false,
+      error: '',
+      location: [0, 0],
     }
   },
   computed: {
@@ -155,6 +158,24 @@ export default {
 
       return filtered
     },
+  },
+  mounted() {
+    // do we support geolocation
+    if (!('geolocation' in navigator)) {
+      this.error = 'Geolocation is not available.'
+    }
+    this.gettingLocation = true
+    // get position
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        this.gettingLocation = false
+        this.location = pos
+      },
+      (err) => {
+        this.gettingLocation = false
+        this.error = err.message
+      }
+    )
   },
 
   methods: {
