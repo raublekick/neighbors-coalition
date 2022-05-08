@@ -30,6 +30,7 @@
           <span class="subtitle is-6">{{ item.address }}</span>
         </div>
         <div class="details">
+          <div v-if="item.distance >= 0">{{ item.distance }} miles away</div>
           <div>{{ item.category }}</div>
           <div>{{ item.hoursOfOperation }}</div>
           <div>{{ item.website }}</div>

@@ -19,29 +19,41 @@
             >
           </div>
         </b-message>
+        <client-only>
+          <map-view :items="filteredResources" :center="center" :home="home" />
 
-        <map-view :items="filteredResources" :center="center" />
-
-        <section class="mt-4">
-          <b-field grouped group-multiline>
-            <b-field label="Search">
-              <b-input
-                v-model="filter"
-                placeholder="Search..."
-                type="search"
-                icon="magnify"
-                icon-clickable
-              >
-              </b-input>
+          <section class="mt-4">
+            <b-field grouped group-multiline>
+              <b-field label="Search">
+                <b-input
+                  v-model="filter"
+                  placeholder="Search..."
+                  type="search"
+                  icon="magnify"
+                  icon-clickable
+                >
+                </b-input>
+              </b-field>
+              <b-field label="Distance (miles)">
+                <b-select
+                  v-model="distance"
+                >
+                  <option value="1">1</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                </b-select>
+              </b-field>
             </b-field>
-          </b-field>
-        </section>
+          </section>
 
-        <resource-list
-          class="mt-4"
-          :items="filteredResources"
-          @clicked="setCenter"
-        />
+          <resource-list
+            class="mt-4"
+            :items="filteredResources"
+            @clicked="setCenter"
+          />
+        </client-only>
       </div>
     </div>
   </div>
@@ -49,12 +61,12 @@
 
 <script>
 import * as _ from "lodash";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import MapView from "@/components/Map";
 import ResourceList from "~/components/ResourceList.vue";
 
 export default {
-  name: "Home",
+  name: "AllMap",
   components: {
     MapView,
     ResourceList,
@@ -62,32 +74,66 @@ export default {
   data() {
     return {
       filter: "",
-      center: {
-        lat: process.env.VUE_APP_CENTER_LAT || 33.4515,
-        lng: process.env.VUE_APP_CENTER_LNG || -112.07,
-      },
+      distance: 10,
+      center: [
+        process.env.VUE_APP_CENTER_LAT || 33.4515,
+        process.env.VUE_APP_CENTER_LNG || -112.07,
+      ],
+      home: [],
+      gettingLocation: false,
+      error: "",
+      location: {},
     };
   },
   computed: {
     ...mapState(["resources"]),
     filteredResources() {
-      let filtered = this.mappableItems;
+      let filtered = this.sortedItems;
       if (this.filter !== "") {
         filtered = this.search(filtered, this.filter);
       }
 
       return filtered;
     },
+    sortedItems() {
+      return _.sortBy(this.mappableItems, item => {return item.distance});
+    },
     mappableItems() {
       return _.filter(this.resources, (item) => {
-        return item.latLng && item.latLng !== "";
+        // only map items that have a valid latlng and are under the set distance if the home location is set
+        return item.latLng && item.latLng !== "" && (this.home.length ? parseFloat(item.distance) <= parseFloat(this.distance) && parseFloat(item.distance) > 0 : true);
       });
     },
   },
+  mounted() {
+    // do we support geolocation
+    if (!("geolocation" in navigator)) {
+      this.error = "Geolocation is not available.";
+    }
+    this.gettingLocation = true;
+    // get position
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        this.gettingLocation = false;
+        this.location = pos;
+        this.center = [
+          this.location.coords.latitude,
+          this.location.coords.longitude,
+        ];
+        this.home = this.center;
+        this.updateDistances({ resources: this.resources, center: this.home });
+      },
+      (err) => {
+        this.gettingLocation = false;
+        this.error = err.message;
+      }
+    );
+  },
 
   methods: {
+    ...mapActions(["updateDistances"]),
     setCenter(value) {
-      this.center = { lat: parseFloat(value[0]), lng: parseFloat(value[1]) };
+      this.center = [ parseFloat(value[0]),  parseFloat(value[1]) ];
     },
     print() {
       window.print();
