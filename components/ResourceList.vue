@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-for="(item, i) in items" :key="item.BID" class="mt-4">
+    <div v-for="(item, i) in items" :key="i" class="mt-4">
       <resource :item="item" :persistent-tooltip="i === 0" @clicked="clicked" />
     </div>
   </section>

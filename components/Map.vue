@@ -9,7 +9,7 @@
         style="height: 500px; width: 100%"
       >
         <l-tile-layer :id="id" :url="url" :attribution="attribution" />
-        <l-marker ref="centerMarker" :draggable="false" :lat-lng="center">
+        <l-marker v-if="home.length" ref="homeMarker" :draggable="false" :lat-lng="home">
           <l-icon :icon-url="icons[1]" :icon-size="iconSize" :icon-anchor="iconAnchor" :popup-anchor="popupAnchor"></l-icon>
         </l-marker>
         <l-marker
@@ -56,6 +56,12 @@ export default {
         return [33.4515, -112.07];
       },
     },
+    home: {
+      type: Array,
+      default: () => {
+        return [33.4515, -112.07];
+      },
+    },
   },
   data() {
     return {
@@ -85,7 +91,7 @@ export default {
     center(val) {
       const markerObjects = this.$refs.markersRef.map((ref) => ref.mapObject);
       _.forEach(markerObjects, (item) => {
-        if (item._latlng.lat === val.lat && item._latlng.lng === val.lng) {
+        if (item._latlng.lat === val[0] && item._latlng.lng === val[1]) {
           item.openPopup();
         }
       });
