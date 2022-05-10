@@ -23,37 +23,42 @@
             </figure>
           </b-tooltip>
         </div>
-        <div class="media-content d-flex">
+        <div class="media-content">
           <p class="title is-4">
             <a :href="item.website" target="_blank">{{ item.name }}</a>
           </p>
-          <span class="subtitle is-6">{{ item.address }}</span>
+          <div v-if="item.distance >= 0" class="subtitle is-6">
+            {{ item.distance }} miles away
+          </div>
         </div>
-        <div class="details">
-          <div v-if="item.distance >= 0">{{ item.distance }} miles away</div>
-          <div>{{ item.category }}</div>
-          <div>{{ item.hoursOfOperation }}</div>
-          <div>{{ item.website }}</div>
-          <div>{{ item.email }}</div>
-          <div>{{ item.socialMedia }}</div>
-        </div>
+        <div class="details"></div>
       </div>
 
       <div class="content">
+        <div v-if="item.address">{{ item.address }}</div>
+        <div v-if="item.category">{{ item.category }}</div>
+        <div v-if="item.hoursOfOperation">{{ item.hoursOfOperation }}</div>
+        <div v-if="item.email">{{ item.email }}</div>
+        <div v-if="item.phone">{{ item.phone }}</div>
+
+        <div v-if="item.website">{{ item.website }}</div>
+        <div v-if="item.socialMedia">{{ item.socialMedia }}</div>
+
+        <div v-if="item.services" class="mt-4">
+          <strong>Services:</strong>
+          <read-more :text="item.services" align="right"></read-more>
+        </div>
+
+        <div v-if="item.eligibility" class="mt-4">
+          <strong>Eligibility:</strong>
+          <read-more :text="item.eligibility" align="right"></read-more>
+        </div>
+
         <b-taglist>
           <b-tag v-for="tag in tags" :key="tag" type="is-primary">{{
             tag
           }}</b-tag>
         </b-taglist>
-        <div v-if="item.services">
-          <strong>Services:</strong>
-          <read-more :text="item.services" align="right"></read-more>
-        </div>
-
-        <div v-if="item.eligibility">
-          <strong>Eligibility:</strong>
-          <read-more :text="item.eligibility" align="right"></read-more>
-        </div>
 
         <br />
 
