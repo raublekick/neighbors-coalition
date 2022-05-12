@@ -35,6 +35,13 @@
       </div>
 
       <div class="content">
+        <div>
+          <b-icon icon="link"></b-icon>
+          <b-icon icon="facebook"></b-icon>
+          <b-icon icon="twitter"></b-icon>
+          <b-icon icon="instagram"></b-icon>
+        </div>
+
         <div v-if="item.address">{{ item.address }}</div>
         <div v-if="item.category">{{ item.category }}</div>
         <div v-if="item.hoursOfOperation">{{ item.hoursOfOperation }}</div>
