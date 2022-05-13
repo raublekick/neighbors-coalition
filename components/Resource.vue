@@ -35,6 +35,38 @@
       </div>
 
       <div class="content">
+        <b-modal v-model="showComments" :width="640" scroll="keep">
+        <div class="card">
+          <div class="card-content">
+            <div><b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon></div>
+            Something incredible is waiting to be known brain is the seed of
+            intelligence ship of the imagination billions upon billions hearts of
+            the stars venture. Astonishment from which we spring the sky calls to
+            us culture astonishment take root and flourish. Globular star cluster
+            Drake Equation tingling of the spine Drake Equation the carbon in our
+            apple pies citizens of distant epochs. Two ghostly white figures in
+            coveralls and helmets are softly dancing a very small stage in a vast
+            cosmic arena with pretty stories for which there's little good
+            evidence a very small stage in a vast cosmic arena the only home we've
+            ever known encyclopaedia galactica and billions upon billions upon
+            billions upon billions upon billions upon billions upon billions.
+          </div>
+          </div>  
+        </b-modal>
+        </div>
+        <div>
+          <a href="#" @click.prevent="showComments = !showComments">
+            <b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon>
+            <b-icon icon="star"></b-icon>
+          </a>
+        </div>
         <div>
           <b-icon icon="link"></b-icon>
           <b-icon icon="facebook"></b-icon>
@@ -125,6 +157,7 @@ export default {
         require("../assets/pin-green.png"),
         require("../assets/pin-yellow.png"),
       ],
+      showComments: false,
       d_persistentTooltip: false,
     };
   },
