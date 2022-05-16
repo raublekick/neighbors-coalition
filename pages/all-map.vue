@@ -35,14 +35,14 @@
                 </b-input>
               </b-field>
               <b-field label="Distance (miles)">
-                <b-select
-                  v-model="distance"
-                >
+                <b-select v-model="distance">
+                  <option value="">Show all</option>
                   <option value="1">1</option>
                   <option value="5">5</option>
                   <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
+                  <option value="100">100</option>
                 </b-select>
               </b-field>
             </b-field>
@@ -96,12 +96,21 @@ export default {
       return filtered;
     },
     sortedItems() {
-      return _.sortBy(this.mappableItems, item => {return item.distance});
+      return _.sortBy(this.mappableItems, (item) => {
+        return item.distance;
+      });
     },
     mappableItems() {
       return _.filter(this.resources, (item) => {
         // only map items that have a valid latlng and are under the set distance if the home location is set
-        return item.latLng && item.latLng !== "" && (this.home.length ? parseFloat(item.distance) <= parseFloat(this.distance) && parseFloat(item.distance) > 0 : true);
+        return (
+          item.latLng &&
+          item.latLng !== "" &&
+          (this.home.length && this.distance
+            ? parseFloat(item.distance) <= parseFloat(this.distance) &&
+              parseFloat(item.distance) > 0
+            : true)
+        );
       });
     },
   },
@@ -133,7 +142,7 @@ export default {
   methods: {
     ...mapActions(["updateDistances"]),
     setCenter(value) {
-      this.center = [ parseFloat(value[0]),  parseFloat(value[1]) ];
+      this.center = [parseFloat(value[0]), parseFloat(value[1])];
     },
     print() {
       window.print();
