@@ -25,7 +25,8 @@
         </div>
         <div class="media-content">
           <p class="title is-4">
-            <a :href="item.website" target="_blank">{{ item.name }}</a>
+            <a v-if="item.website" :href="item.website" target="_blank">{{ item.name }}</a>
+            <span v-else>{{ item.name }}</span>
           </p>
           <div v-if="item.distance >= 0" class="subtitle is-6">
             {{ item.distance }} miles away
@@ -36,25 +37,85 @@
 
       <div class="content">
         <b-modal v-model="showComments" :width="640" scroll="keep">
-        <div class="card">
-          <div class="card-content">
-            <div><b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon></div>
-            Something incredible is waiting to be known brain is the seed of
-            intelligence ship of the imagination billions upon billions hearts of
-            the stars venture. Astonishment from which we spring the sky calls to
-            us culture astonishment take root and flourish. Globular star cluster
-            Drake Equation tingling of the spine Drake Equation the carbon in our
-            apple pies citizens of distant epochs. Two ghostly white figures in
-            coveralls and helmets are softly dancing a very small stage in a vast
-            cosmic arena with pretty stories for which there's little good
-            evidence a very small stage in a vast cosmic arena the only home we've
-            ever known encyclopaedia galactica and billions upon billions upon
-            billions upon billions upon billions upon billions upon billions.
-          </div>
+          <div class="card mb-4">
+            <div class="card-content">
+              <div><b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon></div>
+              Something incredible is waiting to be known brain is the seed of
+              intelligence ship of the imagination billions upon billions hearts of
+              the stars venture. Astonishment from which we spring the sky calls to
+              us culture astonishment take root and flourish. Globular star cluster
+              Drake Equation tingling of the spine Drake Equation the carbon in our
+              apple pies citizens of distant epochs. Two ghostly white figures in
+              coveralls and helmets are softly dancing a very small stage in a vast
+              cosmic arena with pretty stories for which there's little good
+              evidence a very small stage in a vast cosmic arena the only home we've
+              ever known encyclopaedia galactica and billions upon billions upon
+              billions upon billions upon billions upon billions upon billions.
+            </div>
+          </div>  
+          <div class="card mb-4">
+            <div class="card-content">
+              <div><b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon></div>
+              Something incredible is waiting to be known brain is the seed of
+              intelligence ship of the imagination billions upon billions hearts of
+              the stars venture. Astonishment from which we spring the sky calls to
+              us culture astonishment take root and flourish. Globular star cluster
+              Drake Equation tingling of the spine Drake Equation the carbon in our
+              apple pies citizens of distant epochs. Two ghostly white figures in
+              coveralls and helmets are softly dancing a very small stage in a vast
+              cosmic arena with pretty stories for which there's little good
+              evidence a very small stage in a vast cosmic arena the only home we've
+              ever known encyclopaedia galactica and billions upon billions upon
+              billions upon billions upon billions upon billions upon billions.
+            </div>
+          </div>  
+          <div class="card mb-4">
+            <div class="card-content">
+              <div><b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon></div>
+              Something incredible is waiting to be known brain is the seed of
+              intelligence ship of the imagination billions upon billions hearts of
+              the stars venture. Astonishment from which we spring the sky calls to
+              us culture astonishment take root and flourish. Globular star cluster
+              Drake Equation tingling of the spine Drake Equation the carbon in our
+              apple pies citizens of distant epochs. Two ghostly white figures in
+              coveralls and helmets are softly dancing a very small stage in a vast
+              cosmic arena with pretty stories for which there's little good
+              evidence a very small stage in a vast cosmic arena the only home we've
+              ever known encyclopaedia galactica and billions upon billions upon
+              billions upon billions upon billions upon billions upon billions.
+            </div>
+          </div>  
+          <div class="card mb-4">
+            <div class="card-content">
+              <div><b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon>
+              <b-icon icon="star"></b-icon></div>
+              Something incredible is waiting to be known brain is the seed of
+              intelligence ship of the imagination billions upon billions hearts of
+              the stars venture. Astonishment from which we spring the sky calls to
+              us culture astonishment take root and flourish. Globular star cluster
+              Drake Equation tingling of the spine Drake Equation the carbon in our
+              apple pies citizens of distant epochs. Two ghostly white figures in
+              coveralls and helmets are softly dancing a very small stage in a vast
+              cosmic arena with pretty stories for which there's little good
+              evidence a very small stage in a vast cosmic arena the only home we've
+              ever known encyclopaedia galactica and billions upon billions upon
+              billions upon billions upon billions upon billions upon billions.
+            </div>
           </div>  
         </b-modal>
         </div>
@@ -68,20 +129,17 @@
           </a>
         </div>
         <div>
-          <b-icon icon="link"></b-icon>
-          <b-icon icon="facebook"></b-icon>
-          <b-icon icon="twitter"></b-icon>
-          <b-icon icon="instagram"></b-icon>
+          <a v-if="item.website" :href="item.website" target="_blank"><b-icon icon="link"></b-icon></a>
+          <a v-if="item.facebook" :href="item.facebook" target="_blank"><b-icon icon="facebook"></b-icon></a>
+          <a v-if="item.twitter" :href="item.twitter" target="_blank"><b-icon icon="twitter"></b-icon></a>
+          <a v-if="item.instagram" :href="item.instagram" target="_blank"><b-icon icon="instagram"></b-icon></a>
         </div>
 
         <div v-if="item.address">{{ item.address }}</div>
         <div v-if="item.category">{{ item.category }}</div>
         <div v-if="item.hoursOfOperation">{{ item.hoursOfOperation }}</div>
-        <div v-if="item.email">{{ item.email }}</div>
+        <div v-if="item.email"><a :href="'mailto:' + item.email">{{item.email}}</a></div>
         <div v-if="item.phone">{{ item.phone }}</div>
-
-        <div v-if="item.website">{{ item.website }}</div>
-        <div v-if="item.socialMedia">{{ item.socialMedia }}</div>
 
         <div v-if="item.services" class="mt-4">
           <strong>Services:</strong>
