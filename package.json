@@ -21,7 +21,7 @@
     "leaflet": "^1.7.1",
     "moment": "^2.29.2",
     "nuxt": "^2.15.7",
-    "nuxt-buefy": "^0.4.8",
+    "nuxt-buefy": "^0.4.23",
     "nuxt-leaflet": "^0.0.27",
     "vue2-leaflet": "^2.7.1"
   },
