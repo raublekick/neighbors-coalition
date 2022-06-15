@@ -25,7 +25,7 @@
         </div>
         <div class="media-content">
           <p class="title is-4">
-            <a v-if="item.website" :href="item.website" target="_blank">{{ item.name }}</a>
+            <a v-if="item.website" class="has-text-primary" :href="item.website" target="_blank">{{ item.name }}</a>
             <span v-else>{{ item.name }}</span>
           </p>
           <div v-if="item.distance >= 0" class="subtitle is-6">
@@ -39,11 +39,11 @@
         <b-modal v-model="showComments" :width="640" scroll="keep">
           <div class="card mb-4">
             <div class="card-content">
-              <div><b-icon icon="star"></b-icon>
-              <b-icon icon="star"></b-icon>
-              <b-icon icon="star"></b-icon>
-              <b-icon icon="star"></b-icon>
-              <b-icon icon="star"></b-icon></div>
+              <div><b-icon type="is-primary" icon="star"></b-icon>
+              <b-icon type="is-primary" icon="star"></b-icon>
+              <b-icon type="is-primary" icon="star"></b-icon>
+              <b-icon type="is-primary" icon="star"></b-icon>
+              <b-icon type="is-primary" icon="star"></b-icon></div>
               Something incredible is waiting to be known brain is the seed of
               intelligence ship of the imagination billions upon billions hearts of
               the stars venture. Astonishment from which we spring the sky calls to
@@ -121,18 +121,18 @@
         </div>
         <div>
           <a href="#" @click.prevent="showComments = !showComments">
-            <b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon>
-            <b-icon icon="star"></b-icon>
+            <b-icon type="is-primary" icon="star"></b-icon>
+            <b-icon type="is-primary" icon="star"></b-icon>
+            <b-icon type="is-primary" icon="star"></b-icon>
+            <b-icon type="is-primary" icon="star"></b-icon>
+            <b-icon type="is-primary" icon="star"></b-icon>
           </a>
         </div>
         <div>
-          <a v-if="item.website" :href="item.website" target="_blank"><b-icon icon="link"></b-icon></a>
-          <a v-if="item.facebook" :href="item.facebook" target="_blank"><b-icon icon="facebook"></b-icon></a>
-          <a v-if="item.twitter" :href="item.twitter" target="_blank"><b-icon icon="twitter"></b-icon></a>
-          <a v-if="item.instagram" :href="item.instagram" target="_blank"><b-icon icon="instagram"></b-icon></a>
+          <a v-if="item.website" class="has-text-primary" :href="item.website" target="_blank"><b-icon icon="link"></b-icon></a>
+          <a v-if="item.facebook" class="has-text-primary" :href="item.facebook" target="_blank"><b-icon icon="facebook"></b-icon></a>
+          <a v-if="item.twitter" class="has-text-primary" :href="item.twitter" target="_blank"><b-icon icon="twitter"></b-icon></a>
+          <a v-if="item.instagram" class="has-text-primary" :href="item.instagram" target="_blank"><b-icon icon="instagram"></b-icon></a>
         </div>
 
         <div v-if="item.address">{{ item.address }}</div>

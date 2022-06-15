@@ -2,7 +2,7 @@
   <b-navbar class="has-shadow is-spaced" wrapper-class="container">
     <template slot="brand">
       <b-navbar-item tag="router-link" :to="{ name: 'index' }">
-        FP
+        <img src="fp.png" alt="Feed Phoenix" />
       </b-navbar-item>
     </template>
     <template slot="start"> </template>
@@ -15,7 +15,7 @@
       >
         Home
       </b-navbar-item>
-      <b-navbar-item
+      <!-- <b-navbar-item
         tag="router-link"
         class="has-text-weight-bold"
         :to="{ name: 'help-me' }"
@@ -35,7 +35,7 @@
         :to="{ name: 'calendar' }"
       >
         Calendar
-      </b-navbar-item>
+      </b-navbar-item> -->
       <!-- <b-navbar-item
         tag="router-link"
         class="has-text-weight-bold"
@@ -70,5 +70,4 @@ export default {
 </script>
 
 <style>
-
 </style>

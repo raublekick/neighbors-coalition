@@ -8,7 +8,11 @@
           has-icon
           aria-close-label="Close message"
         >
-          <p class="mt-4">This data is currently sourced from......</p>
+          <p class="mt-4">
+            This data is currently sourced through community volunteers. If you
+            have a resource suggestion to add or a correction, please submit
+            this form.
+          </p>
           <div class="mt-4">
             <b-button
               tag="a"
