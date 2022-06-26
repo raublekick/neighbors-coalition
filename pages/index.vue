@@ -8,14 +8,17 @@
           has-icon
           aria-close-label="Close message"
         >
-          <p class="mt-4">This data is currently sourced from......</p>
+          <p class="mt-4">
+            This data is sourced from community volunteers and feeback from
+            users. Do you know of a resource that we don't?
+          </p>
           <div class="mt-4">
             <b-button
               tag="a"
               type="is-primary"
               target="_blank"
-              @click.prevent=""
-              >Submit a correction</b-button
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfYak8R03DyGPBTyJudI_b-VmZb9CUbaMm3yDSAwe9RrxG3Eg/viewform?usp=pp_url&entry.1291524438=Suggest+a+new+resource"
+              >Suggest a resource</b-button
             >
           </div>
         </b-message>
